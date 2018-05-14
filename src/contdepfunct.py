@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import division
 # Functions that generate a continuous dependent attribute value.
 #
 # These are functions that require as input a floating-point value (assumed to
@@ -19,6 +21,8 @@
 #
 # =============================================================================
 
+from builtins import str
+from past.utils import old_div
 import random
 
 # -----------------------------------------------------------------------------
@@ -33,12 +37,12 @@ def blood_pressure_depending_on_age(age):
   """
 
   if ((not isinstance(age, int)) and (not isinstance(age, float))):
-    raise Exception, 'Age value given is not a number: %s' % (str(age))
+    raise Exception('Age value given is not a number: %s' % (str(age)))
 
   if (age < 0) or (age > 130):
-    raise Exception, 'Age value below 0 or above 130 given'
+    raise Exception('Age value below 0 or above 130 given')
 
-  avrg_bp = 75.0 + age/100.0
+  avrg_bp = 75.0 + old_div(age,100.0)
 
   std_dev_bp = 4.0
 
@@ -46,7 +50,7 @@ def blood_pressure_depending_on_age(age):
 
   if bp < 0.0:
     bp = 0.0
-    print 'Warning, blood pressure value of 0.0 returned!'
+    print('Warning, blood pressure value of 0.0 returned!')
 
   return bp
 
@@ -64,17 +68,17 @@ def salary_depending_on_age(age):
   """
 
   if ((not isinstance(age, int)) and (not isinstance(age, float))):
-    raise Exception, 'Age value given is not a number: %s' % (str(age))
+    raise Exception('Age value given is not a number: %s' % (str(age)))
 
   if (age < 0) or (age > 130):
-    raise Exception, 'Age value below 0 or above 130 given'
+    raise Exception('Age value below 0 or above 130 given')
 
   if (age < 18.0):
     sal = 0.0
 
   else:
     min_sal = 10000.0
-    max_sal = 10000.0 + (age-18.0)*(140000./42)
+    max_sal = 10000.0 + (age-18.0)*(old_div(140000.,42))
 
     sal = random.uniform(min_sal, max_sal)
 
