@@ -1,16 +1,18 @@
-from corruptor import CorruptDataSet, CorruptCategoricalValue, CorruptValuePhonetic, CorruptValueOCR, CorruptValueKeyboard, CorruptValueEdit
-from corruptor import position_mod_normal, position_mod_uniform
-from basefunctions import char_set_ascii
+from geco import CorruptDataSet, CorruptCategoricalValue, CorruptValuePhonetic, CorruptValueOCR, CorruptValueKeyboard, CorruptValueEdit
+from geco import position_mod_normal, position_mod_uniform
+from geco import char_set_ascii
+
+from geco import LOOKUP_SURNAME_MISSSPELL, LOOKUP_OCR_VARIATIONS, LOOKUP_PHONETIC_VARIATIONS
 
 surname_misspell_corruptor = CorruptCategoricalValue(
-    lookup_file_name = 'lookup-files/surname-misspell.csv',
+    lookup_file_name = LOOKUP_SURNAME_MISSSPELL,
     has_header_line = False,
     unicode_encoding = 'ascii'
 )
 
 ocr_corruptor = CorruptValueOCR(
     position_function = position_mod_normal,
-    lookup_file_name = 'lookup-files/ocr-variations.csv',
+    lookup_file_name = LOOKUP_OCR_VARIATIONS,
     has_header_line = False,
     unicode_encoding = 'ascii'
 )
@@ -22,7 +24,7 @@ keyboard_corruptor = CorruptValueKeyboard(
 )
 
 phonetic_corruptor = CorruptValuePhonetic(
-    lookup_file_name = 'lookup-files/phonetic-variations.csv',
+    lookup_file_name = LOOKUP_PHONETIC_VARIATIONS,
     has_header_line = False,
     unicode_encoding = 'ascii'
 )
@@ -76,3 +78,5 @@ res = data_corruptor.corrupt_records({
     '1-1': ['John', 'Smith', 'Streetware 102', 'London'],
     '2-2': ['Jane', 'Smith', 'Streetware 102', 'London']
 })
+
+print(res)
