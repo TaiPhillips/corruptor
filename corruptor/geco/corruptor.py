@@ -27,7 +27,7 @@ from past.utils import old_div
 import math
 import random
 
-import geco.basefunctions
+import corruptor.geco.basefunctions
 
 # =============================================================================
 # Helper functions to randomly select a position for where to apply a
@@ -117,14 +117,14 @@ class CorruptValue(object):
     for (keyword, value) in list(base_kwargs.items()):
 
       if (keyword.startswith('position')):
-        geco.basefunctions.check_is_function_or_method('position_function', value)
+        corruptor.geco.basefunctions.check_is_function_or_method('position_function', value)
         self.position_function = value
 
       else:
         raise Exception('Illegal constructor argument keyword: "%s"' % \
               (str(keyword)))
 
-    geco.basefunctions.check_is_function_or_method('position_function',
+    corruptor.geco.basefunctions.check_is_function_or_method('position_function',
                                               self.position_function)
 
     # Check if the position function does return an integer value
@@ -182,7 +182,7 @@ class CorruptMissingValue(CorruptValue):
     for (keyword, value) in list(kwargs.items()):
 
       if (keyword.startswith('miss')):
-        geco.basefunctions.check_is_string('missing_val', value)
+        corruptor.geco.basefunctions.check_is_string('missing_val', value)
         self.missing_val = value
 
       else:
@@ -242,23 +242,23 @@ class CorruptValueEdit(CorruptValue):
     for (keyword, value) in list(kwargs.items()):
 
       if (keyword.startswith('char')):
-        geco.basefunctions.check_is_function_or_method('char_set_funct', value)
+        corruptor.geco.basefunctions.check_is_function_or_method('char_set_funct', value)
         self.char_set_funct = value
 
       elif (keyword.startswith('ins')):
-        geco.basefunctions.check_is_normalised('insert_prob', value)
+        corruptor.geco.basefunctions.check_is_normalised('insert_prob', value)
         self.insert_prob = value
 
       elif (keyword.startswith('del')):
-        geco.basefunctions.check_is_normalised('delete_prob', value)
+        corruptor.geco.basefunctions.check_is_normalised('delete_prob', value)
         self.delete_prob = value
 
       elif (keyword.startswith('sub')):
-        geco.basefunctions.check_is_normalised('substitute_prob', value)
+        corruptor.geco.basefunctions.check_is_normalised('substitute_prob', value)
         self.substitute_prob = value
 
       elif (keyword.startswith('tran')):
-        geco.basefunctions.check_is_normalised('transpose_prob', value)
+        corruptor.geco.basefunctions.check_is_normalised('transpose_prob', value)
         self.transpose_prob = value
 
       else:
@@ -268,17 +268,17 @@ class CorruptValueEdit(CorruptValue):
 
     # Check if the necessary variables have been set
     #
-    geco.basefunctions.check_is_function_or_method('char_set_funct',
+    corruptor.geco.basefunctions.check_is_function_or_method('char_set_funct',
                                               self.char_set_funct)
-    geco.basefunctions.check_is_normalised('insert_prob',     self.insert_prob)
-    geco.basefunctions.check_is_normalised('delete_prob',     self.delete_prob)
-    geco.basefunctions.check_is_normalised('substitute_prob', self.substitute_prob)
-    geco.basefunctions.check_is_normalised('transpose_prob',  self.transpose_prob)
+    corruptor.geco.basefunctions.check_is_normalised('insert_prob',     self.insert_prob)
+    corruptor.geco.basefunctions.check_is_normalised('delete_prob',     self.delete_prob)
+    corruptor.geco.basefunctions.check_is_normalised('substitute_prob', self.substitute_prob)
+    corruptor.geco.basefunctions.check_is_normalised('transpose_prob',  self.transpose_prob)
 
     # Check if the character set function returns a string
     #
     test_str = self.char_set_funct('test')   # This might become a problem
-    geco.basefunctions.check_is_string_or_unicode_string('test_str', test_str)
+    corruptor.geco.basefunctions.check_is_string_or_unicode_string('test_str', test_str)
 
     if (abs((self.insert_prob + self.delete_prob + self.substitute_prob + \
          self.transpose_prob) - 1.0) > 0.0000001):
@@ -420,11 +420,11 @@ class CorruptValueKeyboard(CorruptValue):
     for (keyword, value) in list(kwargs.items()):
 
       if (keyword.startswith('row')):
-        geco.basefunctions.check_is_normalised('row_prob', value)
+        corruptor.geco.basefunctions.check_is_normalised('row_prob', value)
         self.row_prob = value
 
       elif (keyword.startswith('col')):
-        geco.basefunctions.check_is_normalised('col_prob', value)
+        corruptor.geco.basefunctions.check_is_normalised('col_prob', value)
         self.col_prob = value
 
       else:
@@ -434,8 +434,8 @@ class CorruptValueKeyboard(CorruptValue):
 
     # Check if the necessary variables have been set
     #
-    geco.basefunctions.check_is_normalised('row_prob', self.row_prob)
-    geco.basefunctions.check_is_normalised('col_prob', self.col_prob)
+    corruptor.geco.basefunctions.check_is_normalised('row_prob', self.row_prob)
+    corruptor.geco.basefunctions.check_is_normalised('col_prob', self.col_prob)
 
     if (abs((self.row_prob + self.col_prob) - 1.0) > 0.0000001):
       raise Exception('Sum of row and column probablities does not sum ' + \
@@ -572,15 +572,15 @@ class CorruptValueOCR(CorruptValue):
     for (keyword, value) in list(kwargs.items()):
 
       if (keyword.startswith('look')):
-        geco.basefunctions.check_is_non_empty_string('lookup_file_name', value)
+        corruptor.geco.basefunctions.check_is_non_empty_string('lookup_file_name', value)
         self.lookup_file_name = value
 
       elif (keyword.startswith('has')):
-        geco.basefunctions.check_is_flag('has_header_line', value)
+        corruptor.geco.basefunctions.check_is_flag('has_header_line', value)
         self.has_header_line = value
 
       elif (keyword.startswith('unicode')):
-        geco.basefunctions.check_is_non_empty_string('unicode_encoding', value)
+        corruptor.geco.basefunctions.check_is_non_empty_string('unicode_encoding', value)
         self.unicode_encoding = value
 
       else:
@@ -590,16 +590,16 @@ class CorruptValueOCR(CorruptValue):
 
     # Check if the necessary variables have been set
     #
-    geco.basefunctions.check_is_non_empty_string('lookup_file_name',
+    corruptor.geco.basefunctions.check_is_non_empty_string('lookup_file_name',
                                             self.lookup_file_name)
-    geco.basefunctions.check_is_flag('has_header_line', self.has_header_line)
-    geco.basefunctions.check_is_non_empty_string('unicode_encoding',
+    corruptor.geco.basefunctions.check_is_flag('has_header_line', self.has_header_line)
+    corruptor.geco.basefunctions.check_is_non_empty_string('unicode_encoding',
                                             self.unicode_encoding)
 
     # Load the OCR variations lookup file - - - - - - - - - - - - - - - - - - -
     #
     header_list, lookup_file_data = \
-                     geco.basefunctions.read_csv_file(self.lookup_file_name,
+                     corruptor.geco.basefunctions.read_csv_file(self.lookup_file_name,
                                                  self.unicode_encoding,
                                                  self.has_header_line)
 
@@ -763,15 +763,15 @@ class CorruptValuePhonetic(CorruptValue):
     for (keyword, value) in list(kwargs.items()):
 
       if (keyword.startswith('look')):
-        geco.basefunctions.check_is_non_empty_string('lookup_file_name', value)
+        corruptor.geco.basefunctions.check_is_non_empty_string('lookup_file_name', value)
         self.lookup_file_name = value
 
       elif (keyword.startswith('has')):
-        geco.basefunctions.check_is_flag('has_header_line', value)
+        corruptor.geco.basefunctions.check_is_flag('has_header_line', value)
         self.has_header_line = value
 
       elif (keyword.startswith('unicode')):
-        geco.basefunctions.check_is_non_empty_string('unicode_encoding', value)
+        corruptor.geco.basefunctions.check_is_non_empty_string('unicode_encoding', value)
         self.unicode_encoding = value
 
       else:
@@ -783,16 +783,16 @@ class CorruptValuePhonetic(CorruptValue):
 
     # Check if the necessary variables have been set
     #
-    geco.basefunctions.check_is_non_empty_string('lookup_file_name',
+    corruptor.geco.basefunctions.check_is_non_empty_string('lookup_file_name',
                                             self.lookup_file_name)
-    geco.basefunctions.check_is_flag('has_header_line', self.has_header_line)
-    geco.basefunctions.check_is_non_empty_string('unicode_encoding',
+    corruptor.geco.basefunctions.check_is_flag('has_header_line', self.has_header_line)
+    corruptor.geco.basefunctions.check_is_non_empty_string('unicode_encoding',
                                             self.unicode_encoding)
 
     # Load the misspelling lookup file - - - - - - - - - - - - - - - - - - - - -
     #
     header_list, lookup_file_data = \
-                     geco.basefunctions.read_csv_file(self.lookup_file_name,
+                     corruptor.geco.basefunctions.read_csv_file(self.lookup_file_name,
                                                  self.unicode_encoding,
                                                  self.has_header_line)
 
@@ -1270,15 +1270,15 @@ class CorruptCategoricalValue(CorruptValue):
     for (keyword, value) in list(kwargs.items()):
 
       if (keyword.startswith('look')):
-        geco.basefunctions.check_is_non_empty_string('lookup_file_name', value)
+        corruptor.geco.basefunctions.check_is_non_empty_string('lookup_file_name', value)
         self.lookup_file_name = value
 
       elif (keyword.startswith('has')):
-        geco.basefunctions.check_is_flag('has_header_line', value)
+        corruptor.geco.basefunctions.check_is_flag('has_header_line', value)
         self.has_header_line = value
 
       elif (keyword.startswith('unicode')):
-        geco.basefunctions.check_is_non_empty_string('unicode_encoding', value)
+        corruptor.geco.basefunctions.check_is_non_empty_string('unicode_encoding', value)
         self.unicode_encoding = value
 
       else:
@@ -1290,16 +1290,16 @@ class CorruptCategoricalValue(CorruptValue):
 
     # Check if the necessary variables have been set
     #
-    geco.basefunctions.check_is_non_empty_string('lookup_file_name',
+    corruptor.geco.basefunctions.check_is_non_empty_string('lookup_file_name',
                                             self.lookup_file_name)
-    geco.basefunctions.check_is_flag('has_header_line', self.has_header_line)
-    geco.basefunctions.check_is_non_empty_string('unicode_encoding',
+    corruptor.geco.basefunctions.check_is_flag('has_header_line', self.has_header_line)
+    corruptor.geco.basefunctions.check_is_non_empty_string('unicode_encoding',
                                             self.unicode_encoding)
 
     # Load the misspelling lookup file - - - - - - - - - - - - - - - - - - - - -
     #
     header_list, lookup_file_data = \
-                     geco.basefunctions.read_csv_file(self.lookup_file_name,
+                     corruptor.geco.basefunctions.read_csv_file(self.lookup_file_name,
                                                  self.unicode_encoding,
                                                  self.has_header_line)
 
@@ -1446,22 +1446,22 @@ class CorruptDataSet(object):
     for (keyword, value) in list(kwargs.items()):
 
       if (keyword.startswith('number_of_m')):
-        geco.basefunctions.check_is_integer('number_of_mod_records', value)
-        geco.basefunctions.check_is_positive('number_of_mod_records', value)
+        corruptor.geco.basefunctions.check_is_integer('number_of_mod_records', value)
+        corruptor.geco.basefunctions.check_is_positive('number_of_mod_records', value)
         self.number_of_mod_records = value
 
       elif (keyword.startswith('number_of_o')):
-        geco.basefunctions.check_is_integer('number_of_org_records', value)
-        geco.basefunctions.check_is_positive('number_of_org_records', value)
+        corruptor.geco.basefunctions.check_is_integer('number_of_org_records', value)
+        corruptor.geco.basefunctions.check_is_positive('number_of_org_records', value)
         self.number_of_org_records = value
 
       elif (keyword.startswith('attribute')):
-        geco.basefunctions.check_is_list('attribute_name_list', value)
+        corruptor.geco.basefunctions.check_is_list('attribute_name_list', value)
         self.attribute_name_list = value
 
       elif (keyword.startswith('max_num_dup')):
-        geco.basefunctions.check_is_integer('max_num_dup_per_rec', value)
-        geco.basefunctions.check_is_positive('max_num_dup_per_rec', value)
+        corruptor.geco.basefunctions.check_is_integer('max_num_dup_per_rec', value)
+        corruptor.geco.basefunctions.check_is_positive('max_num_dup_per_rec', value)
         self.max_num_dup_per_rec = value
 
       elif (keyword.startswith('num_dup_')):
@@ -1471,21 +1471,21 @@ class CorruptDataSet(object):
         self.num_dup_dist = value
 
       elif (keyword.startswith('num_mod_per_r')):
-        geco.basefunctions.check_is_integer('num_mod_per_rec', value)
-        geco.basefunctions.check_is_positive('num_mod_per_rec', value)
+        corruptor.geco.basefunctions.check_is_integer('num_mod_per_rec', value)
+        corruptor.geco.basefunctions.check_is_positive('num_mod_per_rec', value)
         self.num_mod_per_rec = value
 
       elif (keyword.startswith('max_num_mod_per_a')):
-        geco.basefunctions.check_is_integer('max_num_mod_per_attr', value)
-        geco.basefunctions.check_is_positive('max_num_mod_per_attr', value)
+        corruptor.geco.basefunctions.check_is_integer('max_num_mod_per_attr', value)
+        corruptor.geco.basefunctions.check_is_positive('max_num_mod_per_attr', value)
         self.max_num_mod_per_attr = value
 
       elif (keyword.startswith('attr_mod_p')):
-        geco.basefunctions.check_is_dictionary('attr_mod_prob_dict', value)
+        corruptor.geco.basefunctions.check_is_dictionary('attr_mod_prob_dict', value)
         self.attr_mod_prob_dict = value
 
       elif (keyword.startswith('attr_mod_d')):
-        geco.basefunctions.check_is_dictionary('attr_mod_data_dict', value)
+        corruptor.geco.basefunctions.check_is_dictionary('attr_mod_data_dict', value)
         self.attr_mod_data_dict = value
 
       else:
@@ -1494,35 +1494,35 @@ class CorruptDataSet(object):
 
     # Check if the necessary variables have been set
     #
-    geco.basefunctions.check_is_integer('number_of_mod_records',
+    corruptor.geco.basefunctions.check_is_integer('number_of_mod_records',
                                    self.number_of_mod_records)
-    geco.basefunctions.check_is_positive('number_of_mod_records',
+    corruptor.geco.basefunctions.check_is_positive('number_of_mod_records',
                                    self.number_of_mod_records)
-    geco.basefunctions.check_is_integer('number_of_org_records',
+    corruptor.geco.basefunctions.check_is_integer('number_of_org_records',
                                    self.number_of_org_records)
-    geco.basefunctions.check_is_positive('number_of_org_records',
+    corruptor.geco.basefunctions.check_is_positive('number_of_org_records',
                                    self.number_of_org_records)
-    geco.basefunctions.check_is_list('attribute_name_list',
+    corruptor.geco.basefunctions.check_is_list('attribute_name_list',
                                 self.attribute_name_list)
-    geco.basefunctions.check_is_integer('max_num_dup_per_rec',
+    corruptor.geco.basefunctions.check_is_integer('max_num_dup_per_rec',
                                    self.max_num_dup_per_rec)
-    geco.basefunctions.check_is_positive('max_num_dup_per_rec',
+    corruptor.geco.basefunctions.check_is_positive('max_num_dup_per_rec',
                                     self.max_num_dup_per_rec)
-    geco.basefunctions.check_is_string('num_dup_dist', self.num_dup_dist)
-    geco.basefunctions.check_is_integer('num_mod_per_rec',
+    corruptor.geco.basefunctions.check_is_string('num_dup_dist', self.num_dup_dist)
+    corruptor.geco.basefunctions.check_is_integer('num_mod_per_rec',
                                    self.num_mod_per_rec)
-    geco.basefunctions.check_is_positive('num_mod_per_rec',
+    corruptor.geco.basefunctions.check_is_positive('num_mod_per_rec',
                                    self.num_mod_per_rec)
-    geco.basefunctions.check_is_integer('max_num_mod_per_attr',
+    corruptor.geco.basefunctions.check_is_integer('max_num_mod_per_attr',
                                    self.max_num_mod_per_attr)
-    geco.basefunctions.check_is_positive('max_num_mod_per_attr',
+    corruptor.geco.basefunctions.check_is_positive('max_num_mod_per_attr',
                                    self.max_num_mod_per_attr)
     if (self.max_num_mod_per_attr > self.num_mod_per_rec):
       raise Exception('Number of modifications per record must be larger' + \
                        ' than maximum number of modifications per attribute')
-    geco.basefunctions.check_is_dictionary('attr_mod_prob_dict',
+    corruptor.geco.basefunctions.check_is_dictionary('attr_mod_prob_dict',
                                 self.attr_mod_prob_dict)
-    geco.basefunctions.check_is_dictionary('attr_mod_data_dict',
+    corruptor.geco.basefunctions.check_is_dictionary('attr_mod_data_dict',
                                       self.attr_mod_data_dict)
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1631,15 +1631,15 @@ class CorruptDataSet(object):
       if attr_name not in self.attribute_name_list:
         raise Exception('Attribute name "%s" in "attr_mod_data_dict" not ' % \
                          (attr_name) + 'listed in "attribute_name_list"')
-      geco.basefunctions.check_is_list('attr_mod_data_dict entry',
+      corruptor.geco.basefunctions.check_is_list('attr_mod_data_dict entry',
                                   attr_mod_data_list)
       prob_sum = 0.0
       for list_elem in attr_mod_data_list:
-        geco.basefunctions.check_is_tuple('attr_mod_data_dict list element',
+        corruptor.geco.basefunctions.check_is_tuple('attr_mod_data_dict list element',
                                      list_elem)
         assert len(list_elem) == 2, 'attr_mod_data_dict list element does ' + \
                                     'not consist of two elements'
-        geco.basefunctions.check_is_normalised('attr_mod_data_dict list probability',
+        corruptor.geco.basefunctions.check_is_normalised('attr_mod_data_dict list probability',
                                           list_elem[0])
         prob_sum += list_elem[0]
       if (abs(prob_sum - 1.0) > 0.0000001):
