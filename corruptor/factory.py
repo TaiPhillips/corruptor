@@ -3,14 +3,14 @@ from corruptor.geco import CorruptCategoricalValue, CorruptValuePhonetic, Corrup
 from corruptor.geco import LOOKUP_SURNAME_MISSSPELL, LOOKUP_OCR_VARIATIONS, LOOKUP_PHONETIC_VARIATIONS
 from corruptor.geco import position_mod_normal, char_set_ascii
 
-def create_categorical_corruptor(lookup_file, has_header=False):
+def create_categorical_corruptor(lookup_file=LOOKUP_SURNAME_MISSSPELL, has_header=False):
     return CorruptCategoricalValue(
         lookup_file_name=lookup_file, 
         has_header_line=has_header,
         unicode_encoding='ascii'
     )
 
-def create_ocr_corruptor(lookup_file, has_header=False):
+def create_ocr_corruptor(lookup_file=LOOKUP_OCR_VARIATIONS, has_header=False):
     return CorruptValueOCR(
         lookup_file_name=lookup_file,
         position_function=position_mod_normal,
@@ -18,7 +18,7 @@ def create_ocr_corruptor(lookup_file, has_header=False):
         unicode_encoding='ascii'
     )
 
-def create_phonetic_corruptor(lookup_file, has_header=False):
+def create_phonetic_corruptor(lookup_file=LOOKUP_PHONETIC_VARIATIONS, has_header=False):
     return CorruptValuePhonetic(
         lookup_file_name=LOOKUP_PHONETIC_VARIATIONS,
         has_header_line=has_header,

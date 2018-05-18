@@ -1,14 +1,13 @@
 """corruptor.py"""
-from corruptor.geco import LOOKUP_SURNAME_MISSSPELL, LOOKUP_OCR_VARIATIONS, LOOKUP_PHONETIC_VARIATIONS
 from corruptor import factory
 
 class Corruptor():
 
     def __init__(self):
         self.corruptors = {
-            'surname': factory.create_categorical_corruptor(LOOKUP_SURNAME_MISSSPELL),
-            'ocr': factory.create_ocr_corruptor(LOOKUP_OCR_VARIATIONS),
-            'phonetic': factory.create_phonetic_corruptor(LOOKUP_PHONETIC_VARIATIONS),
+            'surname': factory.create_categorical_corruptor(),
+            'ocr': factory.create_ocr_corruptor(),
+            'phonetic': factory.create_phonetic_corruptor(),
             'keyboard': factory.create_keyboard_corruptor(0.5, 0.5),
             'insert': factory.create_edit_corruptor(1.0, 0.0, 0.0, 0.0),
             'delete': factory.create_edit_corruptor(0.0, 1.0, 0.0, 0.0),
