@@ -1,24 +1,27 @@
 """probabilistic_corruptor.py"""
-from corruptor import Corruptor
+from corruptor import BasicCorruptor
 from random import choices
 
-class ProbabilisticCorruptor(Corruptor):
+class ProbabilisticCorruptor(BasicCorruptor):
     """ProbabilisticCorruptor definition"""
 
     def __init__(self, probabilities):
         super().__init__()
 
-        if sum(probabilities.values()) != 1:
+        if sum(probabilities.values()) not in [0.99, 1.00, 1.01]:
             raise Exception('Probabilities must add up to one.')
         
-        corruptors = sorted([c for c in probabilities.keys() if c in self.corruptors.keys()])
-        if len(corruptors) != len(probabilities):
-            raise Exception('Probability for unsupported corruptor found, ' +
+        corruptions = sorted([c for c in probabilities.keys() if c in self.corruptions.keys()])
+        if len(corruptions) != len(probabilities):
+            raise Exception('Probability for unsupported corruptor type found, ' +
                             'please double check names in probability dictionary.')
 
-        self.population = [self.corruptors[c] for c in corruptors]
-        self.weights = [probabilities[c] for c in corruptors]
+        self.population = [self.corruptions[c] for c in corruptions]
+        self.weights = [probabilities[c] for c in corruptions]
 
-    def apply(self, string):
-        corruptor = choices(self.population, self.weights, k=1)[0]
-        return corruptor.corrupt_value(string)
+    def corrupt(self, string):
+        corruption = choices(self.population, self.weights, k=1)[0]
+        if corruption is None:
+            return string
+
+        return corruption.corrupt_value(string)
