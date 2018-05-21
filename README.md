@@ -15,7 +15,7 @@ The supported type of corruptions:
 - Edit (insert, delete, replace, swap)
 
 ## Getting started
-There are two different classes that can be used.
+There are three different classes that can be used.
 
 ### `BasicCorruptor`
 The basic corruptor provides methods for each type of corruption, using default configuration.
@@ -44,3 +44,21 @@ This class selects the type of corruption at random, based on provided weights.
 >>> prob.corrupt('conner')
 'conber'
 ```
+
+### `DataFrameCorruptor`
+In short, the DataFrame corruptor randomly corrupts `n` rows of a pandas DataFrame.
+
+```python
+>>> import pandas as pd
+>>> from corruptor import DataFrameCorruptor
+>>> df = pd.DataFrame({'firstname': ['frank', 'john'], 'lastname': ['johnson', 'conner']})
+>>> dfc = DataFrameCorruptor(n=2, {'firstname': (0.5, prob), 'lastname': (0.5, prob)})
+>>> dfc.corrupt(df)
+  firstname lastname
+0     frahk  johnson
+1      john   conber
+```
+
+
+
+
