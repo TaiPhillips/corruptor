@@ -1,4 +1,7 @@
 # Corruptor
+[![PyPI](https://img.shields.io/pypi/v/corruptor.svg)](https://pypi.org/project/corruptor)
+[![PyPI - License](https://img.shields.io/pypi/l/corruptor.svg)](https://pypi.org/project/corruptor)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/corruptor.svg)](https://pypi.org/project/corruptor)
 
 Want to realistically corrupt your (textual) data? Use Corruptor!
 
