@@ -7,7 +7,6 @@ class BasicCorruptor():
     def __init__(self):
         self.corruptions = {
             'none': None,
-            'misspell': factory.create_categorical_corruptor(),
             'ocr': factory.create_ocr_corruptor(),
             'phonetic': factory.create_phonetic_corruptor(),
             'typo': factory.create_keyboard_corruptor(0.5, 0.5),
@@ -16,9 +15,6 @@ class BasicCorruptor():
             'replace': factory.create_edit_corruptor(0.0, 0.0, 1.0, 0.0),
             'swap': factory.create_edit_corruptor(0.0, 0.0, 0.0, 1.0),
         }
-
-    def misspell(self, string):
-        return self.corruptions['misspell'].corrupt_value(string)
 
     def ocr(self, string):
         return self.corruptions['ocr'].corrupt_value(string)
