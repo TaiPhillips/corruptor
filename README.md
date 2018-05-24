@@ -11,7 +11,6 @@ pip install corruptor
 
 The supported type of corruptions:
 
-- Misspell
 - OCR variation
 - Phonetic variation
 - Typing error
@@ -26,12 +25,20 @@ The basic corruptor provides methods for each type of corruption, using default 
 ```python
 >>> from corruptor import BasicCorruptor
 >>> basic = BasicCorruptor()
->>> basic.misspell('johnson')
-'johnston'
+>>> basic.ocr('johnson')
+'johnst0n'
 >>> basic.phonetic('johnson')
 'johnzon'
 >>> basic.typo('johnson')
 'johhson'
+>>> basic.insert('johnson')
+'johnsson'
+>>> basic.delete('johnson')
+'jhnson'
+>>> basic.replace('johnson')
+'johnsin'
+>>> basic.swap('johnson')
+'johnsno'
 ```
 
 ### `ProbabilisticCorruptor`
