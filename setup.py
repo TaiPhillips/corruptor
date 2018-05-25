@@ -73,7 +73,11 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    packages=['corruptor'],
+    packages=[
+        'corruptor',
+        'corruptor.geco',
+        'corruptor.utils'
+    ],
     package_data={
         'corruptor': [
             'geco/lookup-files/ocr-variations.csv',
