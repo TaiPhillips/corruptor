@@ -62,8 +62,8 @@ In short, the DataFrame corruptor randomly corrupts `n` rows of a pandas DataFra
 >>> import pandas as pd
 >>> from corruptor import DataFrameCorruptor
 >>> df = pd.DataFrame({'firstname': ['frank', 'john'], 'lastname': ['johnson', 'conner']})
->>> dfc = DataFrameCorruptor(n=2, {'firstname': (0.5, prob), 'lastname': (0.5, prob)})
->>> dfc.corrupt(df)
+>>> dfc = DataFrameCorruptor({'firstname': (0.5, prob), 'lastname': (0.5, prob)})
+>>> dfc.corrupt(df, n=2)
   firstname lastname
 0     frahk  johnson
 1      john   conber
